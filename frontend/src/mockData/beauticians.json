@@ -1,0 +1,102 @@
+{
+  "beauticians": [
+    {
+      "id": "1",
+      "firstName": "Grace",
+      "lastName": "Mukendi",
+      "email": "grace.beautician@example.com",
+      "phone": "+243 111 222 333",
+      "skills": ["Hair Styling", "Coloring", "Braids", "Hair Treatment"],
+      "yearsOfExperience": "5",
+      "city": "Kinshasa",
+      "address": "123 Beauty Street, Kinshasa",
+      "bio": "Professional hair stylist with 5 years of experience in modern and traditional hairstyles.",
+      "status": "approved",
+      "averageRating": 4.8,
+      "totalServices": 45,
+      "totalEarnings": 6750000,
+      "appointments": [
+        {
+          "id": "1",
+          "customerName": "Marie Kabila",
+          "service": "Hair Cut & Style",
+          "date": "2024-01-15",
+          "time": "10:00",
+          "status": "confirmed",
+          "total": 100000
+        },
+        {
+          "id": "2",
+          "customerName": "Jean Mukendi",
+          "service": "Hair Coloring",
+          "date": "2024-01-12",
+          "time": "14:00",
+          "status": "completed",
+          "total": 150000
+        }
+      ],
+      "earnings": {
+        "thisMonth": 250000,
+        "lastMonth": 300000,
+        "total": 6750000
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "approvedAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Sarah",
+      "lastName": "Lukaku",
+      "email": "sarah.beautician@example.com",
+      "phone": "+243 444 555 666",
+      "skills": ["Facial Treatments", "Skincare", "Makeup", "Manicure"],
+      "yearsOfExperience": "3",
+      "city": "Kinshasa",
+      "address": "456 Wellness Avenue, Kinshasa",
+      "bio": "Skincare specialist and makeup artist with expertise in facial treatments and beauty enhancement.",
+      "status": "pending_manager_review",
+      "averageRating": 0,
+      "totalServices": 0,
+      "totalEarnings": 0,
+      "appointments": [],
+      "earnings": {
+        "thisMonth": 0,
+        "lastMonth": 0,
+        "total": 0
+      },
+      "createdAt": "2024-01-08T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Aisha",
+      "lastName": "Mbuyi",
+      "email": "aisha.beautician@example.com",
+      "phone": "+243 777 888 999",
+      "skills": ["Nail Art", "Pedicure", "Manicure", "Nail Extensions"],
+      "yearsOfExperience": "2",
+      "city": "Kinshasa",
+      "address": "789 Nail Street, Kinshasa",
+      "bio": "Creative nail artist specializing in nail art, extensions, and professional nail care services.",
+      "status": "pending_admin_review",
+      "averageRating": 0,
+      "totalServices": 0,
+      "totalEarnings": 0,
+      "appointments": [],
+      "earnings": {
+        "thisMonth": 0,
+        "lastMonth": 0,
+        "total": 0
+      },
+      "createdAt": "2024-01-05T00:00:00Z",
+      "managerApprovedAt": "2024-01-06T00:00:00Z"
+    }
+  ],
+  "stats": {
+    "totalBeauticians": 3,
+    "approvedBeauticians": 1,
+    "pendingManagerReview": 1,
+    "pendingAdminReview": 1,
+    "totalServices": 45,
+    "totalEarnings": 6750000
+  }
+}
