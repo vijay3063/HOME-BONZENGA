@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface PaymentData {
   bookingData: {
@@ -47,6 +48,7 @@ interface PaymentData {
 const PaymentSuccessPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [paymentData, setPaymentData] = useState<PaymentData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -122,6 +124,36 @@ Thank you for choosing Home Bonzenga!
     sessionStorage.removeItem('bookingData');
     sessionStorage.removeItem('paymentData');
   };
+
+  // After successful payment, update dashboard mock data so counts reflect
+  useEffect(() => {
+    if (!paymentData || !user?.id) return;
+    try {
+      // Read and update local mock data cache in localStorage per user
+      const key = `hb_dashboard_${user.id}`;
+      const existingRaw = localStorage.getItem(key);
+      let existing = existingRaw ? JSON.parse(existingRaw) : { bookings: [] };
+      const newBookingId = `BK-${Date.now()}`;
+      const newBooking = {
+        id: newBookingId,
+        bookingNumber: newBookingId,
+        type: paymentData.bookingData.type,
+        category: paymentData.bookingData.services[0]?.category || 'general',
+        status: 'confirmed',
+        paymentStatus: 'paid',
+        scheduledDate: paymentData.bookingData.date,
+        scheduledTime: paymentData.bookingData.time,
+        total: paymentData.bookingData.totalPrice,
+        beautician: undefined,
+        services: paymentData.bookingData.services.map(s => ({ id: s.id, name: s.name, price: s.price, duration: s.duration })),
+        createdAt: new Date().toISOString(),
+      };
+      existing.bookings = [newBooking, ...(existing.bookings || [])];
+      localStorage.setItem(key, JSON.stringify(existing));
+    } catch {
+      // ignore
+    }
+  }, [paymentData, user?.id]);
 
   if (loading) {
     return (

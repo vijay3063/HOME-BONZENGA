@@ -32,6 +32,7 @@ import {
   Heart
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useCart } from '@/contexts/CartContext';
 
 interface DashboardStats {
   activeBookings: number;
@@ -82,6 +83,7 @@ const CustomerDashboard = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { items: cartItems, totalItems, totalPrice, removeItem, clearCart, updateQuantity } = useCart();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -97,7 +99,24 @@ const CustomerDashboard = () => {
     try {
       setLoading(true);
       
-      // Use mock data instead of API calls
+      // Prefer locally updated data if present
+      const localKey = user ? `hb_dashboard_${user.id}` : undefined;
+      const localRaw = localKey ? localStorage.getItem(localKey) : null;
+      if (localRaw) {
+        const local = JSON.parse(localRaw);
+        const localBookings = local.bookings || [];
+        setStats({
+          activeBookings: localBookings.filter((b: any) => b.status === 'confirmed' || b.status === 'pending').length,
+          completedBookings: localBookings.filter((b: any) => b.status === 'completed').length,
+          pendingPayments: localBookings.filter((b: any) => b.paymentStatus === 'unpaid').length,
+          totalBookings: localBookings.length,
+        });
+        setBookings(localBookings);
+        setInvoices([]);
+        return;
+      }
+
+      // Fallback to bundled mock data
       const mockData = await import('@/mockData/customers.json');
       const customerData = mockData.default.customers.find(c => c.id === user?.id) || mockData.default.customers[0];
       
@@ -128,6 +147,32 @@ const CustomerDashboard = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const persistBookings = (updated: Booking[]) => {
+    if (!user?.id) return;
+    const key = `hb_dashboard_${user.id}`;
+    const payload = { bookings: updated };
+    localStorage.setItem(key, JSON.stringify(payload));
+    setBookings(updated);
+    setStats({
+      activeBookings: updated.filter(b => b.status === 'confirmed' || b.status === 'pending').length,
+      completedBookings: updated.filter(b => b.status === 'completed').length,
+      pendingPayments: updated.filter(b => b.paymentStatus === 'unpaid').length,
+      totalBookings: updated.length,
+    });
+  };
+
+  const markCompleted = (id: string) => {
+    const updated = bookings.map(b => b.id === id ? { ...b, status: 'completed' } : b);
+    persistBookings(updated);
+    toast.success('Booking marked as completed');
+  };
+
+  const togglePaymentStatus = (id: string) => {
+    const updated = bookings.map(b => b.id === id ? { ...b, paymentStatus: b.paymentStatus === 'paid' ? 'unpaid' : 'paid' } : b);
+    persistBookings(updated);
+    toast.success('Payment status updated');
   };
 
   const getStatusColor = (status: string) => {
@@ -286,6 +331,89 @@ Thank you for choosing Home Bonzenga!
                 </div>
               </CardContent>
             </Card>
+
+            {/* Cart Summary */}
+            <Card className="border-0 shadow-lg md:col-span-2 lg:col-span-4">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-[#6d4c41]">Cart</p>
+                    <p className="text-2xl font-bold text-[#4e342e]">{totalItems} item{totalItems !== 1 ? 's' : ''}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-[#6d4c41]">Estimated Total</p>
+                    <p className="text-2xl font-bold text-[#4e342e]">{totalPrice.toLocaleString()} CDF</p>
+                  </div>
+                </div>
+                {cartItems.length > 0 && (
+                  <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {cartItems.slice(0, 6).map(item => (
+                      <div key={item.id} className="flex items-center justify-between border border-[#fdf6f0] rounded-lg p-3">
+                        <div className="min-w-0">
+                          <p className="font-medium text-[#4e342e] truncate">{item.name}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-6 h-6 p-0"
+                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            >
+                              -
+                            </Button>
+                            <span className="w-8 text-center text-sm text-[#4e342e]">{item.quantity}</span>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-6 h-6 p-0"
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            >
+                              +
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="text-[#4e342e] font-semibold whitespace-nowrap">{(item.price * item.quantity).toLocaleString()} CDF</div>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            className="border-red-200 text-red-600 hover:bg-red-50"
+                            onClick={() => removeItem(item.id)}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div className="mt-4 flex gap-3">
+                  <Button 
+                    className="bg-[#4e342e] hover:bg-[#3b2c26] text-white"
+                    onClick={() => navigate('/customer/at-home-services')}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add More Services
+                  </Button>
+                  {cartItems.length > 0 && (
+                    <Button 
+                      variant="outline"
+                      className="border-red-300 text-red-600 hover:bg-red-50"
+                      onClick={() => clearCart()}
+                    >
+                      Clear Cart
+                    </Button>
+                  )}
+                  <Button 
+                    variant="outline"
+                    className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
+                    onClick={() => navigate('/customer/booking-confirmation')}
+                  >
+                    Proceed to Booking
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
@@ -366,15 +494,35 @@ Thank you for choosing Home Bonzenga!
                           <div className="text-sm text-[#6d4c41]">
                             Services: {booking.services.map(s => s.name).join(', ')}
                           </div>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
-                            onClick={() => navigate(`/customer/bookings/${booking.id}`)}
-                          >
-                            <Eye className="w-4 h-4 mr-1" />
-                            View Details
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
+                              onClick={() => navigate(`/customer/bookings/${booking.id}`)}
+                            >
+                              <Eye className="w-4 h-4 mr-1" />
+                              View Details
+                            </Button>
+                            {booking.status !== 'completed' && (
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                className="border-green-300 text-green-700 hover:bg-green-50"
+                                onClick={() => markCompleted(booking.id)}
+                              >
+                                Mark Completed
+                              </Button>
+                            )}
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              className="border-yellow-300 text-yellow-700 hover:bg-yellow-50"
+                              onClick={() => togglePaymentStatus(booking.id)}
+                            >
+                              {booking.paymentStatus === 'paid' ? 'Mark Unpaid' : 'Mark Paid'}
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTranslation } from "react-i18next";
 import {
@@ -18,9 +19,21 @@ import logo from "../assets/logo.jpg";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  // Calculate search box width based on user state and screen size
+  const getSearchBoxWidth = () => {
+    if (user) {
+      // When user is logged in, more items in navbar, so smaller search box
+      return 'w-28 sm:w-32 xl:w-36';
+    } else {
+      // When no user, fewer items, so larger search box
+      return 'w-40 sm:w-48 xl:w-56';
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +53,17 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsOpen(false);
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/search');
+    }
+    setSearchQuery('');
     setIsOpen(false);
   };
 
@@ -67,7 +91,7 @@ const Navigation = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-6 flex-shrink-0">
           {user ? (
             <RoleNavigation />
           ) : (
@@ -105,7 +129,21 @@ const Navigation = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-3">
+        <div className="hidden lg:flex items-center space-x-3 flex-1 justify-end">
+          {/* Search Box - Responsive width based on user state */}
+          <form onSubmit={handleSearch} className="flex items-center flex-shrink-0">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-5 h-5 font-bold drop-shadow-sm stroke-2" />
+              <Input
+                type="text"
+                placeholder={user ? "Search..." : "Search services..."}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={`pl-12 pr-4 h-10 text-sm border-[#f8d7da]/50 focus:border-[#4e342e] rounded-lg font-sans bg-white shadow-sm ${getSearchBoxWidth()}`}
+              />
+            </div>
+          </form>
+          
           {/* Language Toggle */}
           <LanguageToggle />
           {user ? (
@@ -138,10 +176,28 @@ const Navigation = () => {
 
         </div>
 
+        {/* Mobile Search Box - Visible on smaller screens */}
+        <div className="lg:hidden flex items-center">
+          <form onSubmit={handleSearch} className="flex items-center">
+            <div className="relative">
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-800 w-4 h-4 font-bold drop-shadow-sm stroke-2" />
+              <Input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={`pl-8 pr-3 h-8 text-xs border-[#f8d7da]/50 focus:border-[#4e342e] rounded-lg font-sans bg-white shadow-sm ${
+                  user ? 'w-20' : 'w-28'
+                }`}
+              />
+            </div>
+          </form>
+        </div>
+
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 rounded-lg bg-[#f8d7da]/20 hover:bg-[#f8d7da]/30 transition-colors"
+          className="lg:hidden p-2 rounded-lg bg-[#f8d7da]/20 hover:bg-[#f8d7da]/30 transition-colors ml-2"
         >
           {isOpen ? <X className="w-5 h-5 text-[#4e342e]" /> : <Menu className="w-5 h-5 text-[#4e342e]" />}
         </button>
@@ -151,6 +207,22 @@ const Navigation = () => {
       {isOpen && (
         <div className="absolute top-20 left-0 w-full bg-[#fdf6f0]/95 backdrop-blur-md shadow-xl border-b border-[#f8d7da]/30 lg:hidden">
           <div className="px-4 py-6 space-y-4">
+            {/* Mobile Search Box */}
+            <div className="mb-4">
+              <form onSubmit={handleSearch}>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-5 h-5 font-bold drop-shadow-sm stroke-2" />
+                  <Input
+                    type="text"
+                    placeholder="Search services..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-12 pr-4 h-12 w-full text-sm border-[#f8d7da]/50 focus:border-[#4e342e] rounded-lg font-sans bg-white shadow-sm"
+                  />
+                </div>
+              </form>
+            </div>
+
             {/* Mobile Navigation */}
             <div className="space-y-3">
               <button 

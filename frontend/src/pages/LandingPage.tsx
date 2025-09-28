@@ -195,16 +195,29 @@ const LandingPage = () => {
             {/* At-Home Services */}
             <motion.div variants={fadeInUp}>
               <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-[#fdf6f0] overflow-hidden rounded-3xl h-full">
-                <CardContent className="p-10 text-center">
-                  <div className="w-24 h-24 bg-[#4e342e] rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Home className="w-12 h-12 text-white" />
-                  </div>
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={makeup5}
+                    alt="At-Home Beauty Services"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-black/10 group-hover:from-black/50 group-hover:to-black/20 transition-all duration-300" />
                   
-                  <h3 className="text-2xl font-serif font-bold text-[#4e342e] mb-6">
+                  {/* Icon Overlay */}
+                  <div className="absolute top-4 left-4">
+                    <div className="w-12 h-12 bg-[#4e342e] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Home className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </div>
+                
+                <CardContent className="p-8 text-center">
+                  <h3 className="text-2xl font-serif font-bold text-[#4e342e] mb-4">
                     {t('home.services.atHome.title')}
                   </h3>
                   
-                  <p className="text-lg text-[#6d4c41] leading-relaxed mb-8 font-sans">
+                  <p className="text-lg text-[#6d4c41] leading-relaxed mb-6 font-sans">
                     {t('home.services.atHome.description')}
                   </p>
                   
@@ -212,25 +225,38 @@ const LandingPage = () => {
                     <Button className="bg-[#4e342e] hover:bg-[#3b2c26] text-white px-10 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full">
                       {t('home.services.atHome.button')}
                       <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
-            </CardContent>
-          </Card>
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* Salon Visits */}
             <motion.div variants={fadeInUp}>
               <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-[#fdf6f0] overflow-hidden rounded-3xl h-full">
-                <CardContent className="p-10 text-center">
-                  <div className="w-24 h-24 bg-[#4e342e] rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <Building className="w-12 h-12 text-white" />
-              </div>
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={spa1}
+                    alt="Salon Beauty Services"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-black/10 group-hover:from-black/50 group-hover:to-black/20 transition-all duration-300" />
                   
-                  <h3 className="text-2xl font-serif font-bold text-[#4e342e] mb-6">
+                  {/* Icon Overlay */}
+                  <div className="absolute top-4 left-4">
+                    <div className="w-12 h-12 bg-[#4e342e] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Building className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </div>
+                
+                <CardContent className="p-8 text-center">
+                  <h3 className="text-2xl font-serif font-bold text-[#4e342e] mb-4">
                     {t('home.services.salon.title')}
                   </h3>
                   
-                  <p className="text-lg text-[#6d4c41] leading-relaxed mb-8 font-sans">
+                  <p className="text-lg text-[#6d4c41] leading-relaxed mb-6 font-sans">
                     {t('home.services.salon.description')}
                   </p>
                   
@@ -240,8 +266,8 @@ const LandingPage = () => {
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
             </motion.div>
           </motion.div>
 
@@ -503,7 +529,7 @@ const LandingPage = () => {
                 </Link>
                 <Button 
                   variant="outline" 
-                  className="border-2 border-white/50 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 font-sans"
+                  className="border-2 border-white/50 text-[#4e342e] hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 font-sans"
                 >
                   Learn More
                   </Button>
