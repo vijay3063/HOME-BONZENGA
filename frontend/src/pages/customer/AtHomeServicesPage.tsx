@@ -22,6 +22,7 @@ import {
   Phone
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useCart } from '@/contexts/CartContext';
 
 interface Service {
   id: string;
@@ -39,6 +40,7 @@ interface SelectedService extends Service {
 const AtHomeServicesPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { addItem } = useCart();
   const [services, setServices] = useState<{ [key: string]: Service[] }>({});
   const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,6 +72,7 @@ const AtHomeServicesPage = () => {
   ];
 
   const addToCart = (service: Service) => {
+    // Update local selection UI
     const existingService = selectedServices.find(s => s.id === service.id);
     if (existingService) {
       setSelectedServices(prev => 
@@ -82,6 +85,15 @@ const AtHomeServicesPage = () => {
     } else {
       setSelectedServices(prev => [...prev, { ...service, quantity: 1 }]);
     }
+    // Publish to global cart
+    addItem({
+      id: service.id,
+      name: service.name,
+      description: service.description,
+      price: service.price,
+      duration: service.duration,
+      category: service.category,
+    }, 1);
     toast.success(`${service.name} added to cart`);
   };
 

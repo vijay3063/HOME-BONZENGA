@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
@@ -38,7 +37,6 @@ import spa1 from '@/assets/spa1.jpg';
 import nail from '@/assets/nail.jpg';
 
 const AtHomeServicesPage = () => {
-  const { t } = useTranslation();
   const [productOption, setProductOption] = useState<'with' | 'without' | null>(null);
 
   const fadeInUp = {
@@ -543,7 +541,90 @@ const AtHomeServicesPage = () => {
         </div>
       </section>
 
-    </div> 
+      {/* Footer */}
+      <footer id="contact" className="bg-[#3b2c26] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div>
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#f8d7da] to-[#f0c8cc] rounded-full flex items-center justify-center">
+                  <Home className="w-6 h-6 text-[#3b2c26]" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-white">HOME BONZENGA</h3>
+                  <p className="text-[#f8d7da] font-sans">At-Home Beauty Services</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 font-sans">
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">About Us</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Careers</a>
+                <a href="#contact" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Contact</a>
+              </div>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="text-xl font-serif font-semibold mb-6 text-white">At-Home Services</h4>
+              <div className="space-y-3 font-sans">
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Hair Styling</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Skin Care</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Makeup</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Nail Care</a>
+              </div>
+            </div>
+
+            {/* Process */}
+            <div>
+              <h4 className="text-xl font-serif font-semibold mb-6 text-white">Our Process</h4>
+              <div className="space-y-3 font-sans">
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Book Service</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Manager Review</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Beautician Assignment</a>
+                <a href="#" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">Home Service</a>
+              </div>
+            </div>
+
+            {/* Contact & Social */}
+            <div>
+              <h4 className="text-xl font-serif font-semibold mb-6 text-white">Connect</h4>
+              <div className="space-y-3 text-white/70 mb-6 font-sans">
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span>+243 123 456 789</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 mr-2" />
+                  <span>info@homebonzenga.com</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  <span>Kinshasa, DR Congo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/20 mt-12 pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="text-white/60 text-sm mb-4 sm:mb-0 font-sans">
+                © 2024 HOME BONZENGA. All rights reserved.
+              </div>
+              <div className="flex space-x-2">
+                <button className="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-[#f8d7da] hover:text-[#3b2c26] transition-all duration-300 font-sans">
+                  English
+                </button>
+                <button className="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-[#f8d7da] hover:text-[#3b2c26] transition-all duration-300 font-sans">
+                  Français
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 

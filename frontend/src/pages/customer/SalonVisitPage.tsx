@@ -21,6 +21,7 @@ import {
   Heart
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useCart } from '@/contexts/CartContext';
 
 interface SalonService {
   id: string;
@@ -47,6 +48,7 @@ interface SelectedService extends SalonService {
 const SalonVisitPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { addItem } = useCart();
   const [salons, setSalons] = useState<Salon[]>([]);
   const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -89,6 +91,16 @@ const SalonVisitPage = () => {
         quantity: 1 
       }]);
     }
+
+    // Publish to global cart
+    addItem({
+      id: serviceKey,
+      name: `${service.name}`,
+      price: service.price,
+      duration: service.duration,
+      category: 'salon',
+      description: `From ${salon.name}`,
+    }, 1);
     toast.success(`${service.name} from ${salon.name} added to cart`);
   };
 

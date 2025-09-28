@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -51,6 +52,7 @@ import AdminSettingsPage from "@/pages/admin/SettingsPage";
 import AuthTest from "@/pages/AuthTest";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
+import SearchPage1 from "@/pages/SearchPage1";
 
 import { Loader2 } from "lucide-react";
 
@@ -89,6 +91,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <AuthProvider>
+          <CartProvider>
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 {/* Public routes */}
@@ -346,8 +349,9 @@ const App = () => (
               </Routes>
               <Footer />
             </Suspense>
-          </AuthProvider>
-        </BrowserRouter>
+          </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
       <Toaster richColors position="top-right" />
     </TooltipProvider>
   </QueryClientProvider>
