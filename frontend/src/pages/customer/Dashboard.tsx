@@ -284,56 +284,64 @@ Thank you for choosing Home Bonzenga!
         {/* Stats Cards */}
         {stats && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Active Bookings</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.activeBookings}</p>
                   </div>
-                  <Calendar className="w-8 h-8 text-[#4e342e]" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-full flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Completed</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.completedBookings}</p>
                   </div>
-                  <CheckCircle className="w-8 h-8 text-green-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Pending Payments</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.pendingPayments}</p>
                   </div>
-                  <AlertCircle className="w-8 h-8 text-yellow-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center">
+                    <AlertCircle className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Bookings</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.totalBookings}</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-[#4e342e]" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Cart Summary */}
-            <Card className="border-0 shadow-lg md:col-span-2 lg:col-span-4">
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden md:col-span-2 lg:col-span-4">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -348,15 +356,18 @@ Thank you for choosing Home Bonzenga!
                 {cartItems.length > 0 && (
                   <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {cartItems.slice(0, 6).map(item => (
-                      <div key={item.id} className="flex items-center justify-between border border-[#fdf6f0] rounded-lg p-3">
-                        <div className="min-w-0">
-                          <p className="font-medium text-[#4e342e] truncate">{item.name}</p>
+                      <div key={item.id} className="flex items-center justify-between border border-[#fdf6f0] rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate('/customer/at-home-services')}>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium text-[#4e342e] truncate hover:text-[#3b2c26] transition-colors">{item.name}</p>
                           <div className="flex items-center gap-2 mt-1">
                             <Button
                               variant="outline"
                               size="sm"
                               className="w-6 h-6 p-0"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQuantity(item.id, item.quantity - 1);
+                              }}
                             >
                               -
                             </Button>
@@ -365,7 +376,10 @@ Thank you for choosing Home Bonzenga!
                               variant="outline"
                               size="sm"
                               className="w-6 h-6 p-0"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQuantity(item.id, item.quantity + 1);
+                              }}
                             >
                               +
                             </Button>
@@ -377,7 +391,10 @@ Thank you for choosing Home Bonzenga!
                             variant="outline" 
                             size="sm"
                             className="border-red-200 text-red-600 hover:bg-red-50"
-                            onClick={() => removeItem(item.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeItem(item.id);
+                            }}
                           >
                             Remove
                           </Button>

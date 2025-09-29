@@ -34,24 +34,8 @@ const LoginPage = () => {
     },
   });
 
-  // Handle navigation after successful login
-  useEffect(() => {
-    if (user) {
-      // Navigation is handled by AuthContext after successful login
-      // No need for duplicate toast here as AuthContext already shows success message
-      if (user.role === "ADMIN") {
-        navigate("/admin");
-      } else if (user.role === "MANAGER") {
-        navigate("/manager");
-      } else if (user.role === "VENDOR") {
-        navigate("/vendor");
-      } else if (user.role === "BEAUTICIAN") {
-        navigate("/beautician");
-      } else {
-        navigate("/customer");
-      }
-    }
-  }, [user, navigate]);
+  // Navigation is handled by AuthContext after successful login
+  // No need for additional navigation logic here
 
 const onSubmit = async (data: LoginFormData) => {
   setIsLoading(true);

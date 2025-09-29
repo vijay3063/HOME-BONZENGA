@@ -53,6 +53,11 @@ import AuthTest from "@/pages/AuthTest";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
 import SearchPage1 from "@/pages/SearchPage1";
+import AboutPage from "@/pages/AboutPage";
+import HelpPage from "@/pages/HelpPage";
+import TermsPage from "@/pages/TermsPage";
+import PrivacyPage from "@/pages/PrivacyPage";
+import CareersPage from "@/pages/CareersPage";
 
 import { Loader2 } from "lucide-react";
 
@@ -102,6 +107,11 @@ const App = () => (
                     <Route path="/vendor/register" element={<VendorRegisterPage />} />
                     <Route path="/beautician/register" element={<BeauticianRegistrationPage />} />
                     <Route path="/auth-test" element={<AuthTest />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/help" element={<HelpPage />} />
+                    <Route path="/terms" element={<TermsPage />} />
+                    <Route path="/privacy" element={<PrivacyPage />} />
+                    <Route path="/careers" element={<CareersPage />} />
               <Route path="/at-home-services" element={<AtHomeServicesPage />} />
               <Route path="/salon-visit" element={<SalonVisitPage />} />
               <Route path="/vendor/:id" element={<VendorDetailsPage />} />
@@ -347,8 +357,8 @@ const App = () => (
                 {/* Catch-all */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              <Footer />
             </Suspense>
+            <Footer />
           </CartProvider>
         </AuthProvider>
       </BrowserRouter>
