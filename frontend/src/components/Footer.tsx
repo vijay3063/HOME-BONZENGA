@@ -32,9 +32,9 @@ const Footer = () => {
             </div>
 
             <div className="space-y-3 font-sans">
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.about')}</Link>
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.careers')}</Link>
-              <Link to="/#contact" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.contact')}</Link>
+              <Link to="/about" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.about')}</Link>
+              <Link to="/careers" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.careers')}</Link>
+              <Link to="/help" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.contact')}</Link>
             </div>
             </div>
 
@@ -53,10 +53,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-serif font-semibold mb-6 text-white">{t('footer.support.title')}</h4>
             <div className="space-y-3 font-sans">
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.support.help')}</Link>
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.terms')}</Link>
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.privacy')}</Link>
-              <Link to="/" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.support.faq')}</Link>
+              <Link to="/help" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.support.help')}</Link>
+              <Link to="/terms" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.terms')}</Link>
+              <Link to="/privacy" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.company.privacy')}</Link>
+              <Link to="/help" className="block text-white/70 hover:text-[#f8d7da] transition-colors duration-300">{t('footer.support.faq')}</Link>
             </div>
           </div>
 

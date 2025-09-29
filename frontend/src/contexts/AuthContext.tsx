@@ -98,9 +98,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(user);
       toast.success("Login successful");
       
-      // Redirect to appropriate dashboard
-      const dashboardPath = getDashboardPath(user.role);
-      navigate(dashboardPath);
+      // Always redirect to home page first after login
+      navigate("/");
     } catch (err) {
       console.error(err);
       throw err;

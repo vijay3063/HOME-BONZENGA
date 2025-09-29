@@ -221,27 +221,27 @@ const AtHomeServicesPage = () => {
             {/* Services Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredServices().map((service) => (
-                <Card key={service.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
+                <Card key={service.id} className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] rounded-2xl overflow-hidden">
+                  <CardHeader className="bg-gradient-to-r from-[#fdf6f0] to-[#f8e8e0] border-b border-[#f8d7da]/20">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xl font-serif text-[#4e342e]">
                         {service.name}
                       </CardTitle>
-                      <Badge variant="secondary" className="bg-[#fdf6f0] text-[#4e342e]">
+                      <Badge variant="secondary" className="bg-[#4e342e] text-white border-0 shadow-sm">
                         {service.category}
                       </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-[#6d4c41] mb-4">{service.description}</p>
+                  <CardContent className="p-6">
+                    <p className="text-[#6d4c41] mb-6 leading-relaxed">{service.description}</p>
                     
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-4 text-sm text-[#6d4c41]">
-                        <div className="flex items-center gap-1">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-6 text-sm text-[#6d4c41]">
+                        <div className="flex items-center gap-2 bg-[#f8d7da]/20 px-3 py-1 rounded-full">
                           <Clock className="w-4 h-4" />
                           {service.duration} min
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2 bg-[#f8d7da]/20 px-3 py-1 rounded-full">
                           <DollarSign className="w-4 h-4" />
                           {service.price.toLocaleString()} CDF
                         </div>
@@ -249,7 +249,7 @@ const AtHomeServicesPage = () => {
                     </div>
 
                     <Button 
-                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white"
+                      className="w-full bg-gradient-to-r from-[#4e342e] to-[#6d4c41] hover:from-[#3b2c26] hover:to-[#5a3520] text-white py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                       onClick={() => addToCart(service)}
                     >
                       Add to Cart
@@ -270,8 +270,8 @@ const AtHomeServicesPage = () => {
 
           {/* Cart Sidebar */}
           <div className="lg:col-span-1">
-            <Card className="border-0 shadow-lg sticky top-8">
-              <CardHeader>
+            <Card className="border border-[#f8d7da]/30 bg-gradient-to-br from-white to-[#fdf6f0] shadow-lg sticky top-8 rounded-2xl overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-[#fdf6f0] to-[#f8e8e0] border-b border-[#f8d7da]/20">
                 <CardTitle className="text-xl font-serif text-[#4e342e]">
                   Selected Services
                 </CardTitle>
@@ -284,13 +284,16 @@ const AtHomeServicesPage = () => {
                 ) : (
                   <div className="space-y-4">
                     {selectedServices.map((service) => (
-                      <div key={service.id} className="border-b border-[#fdf6f0] pb-4">
+                      <div key={service.id} className="border-b border-[#fdf6f0] pb-4 cursor-pointer hover:bg-[#fdf6f0]/50 rounded-lg p-2 -m-2 transition-colors" onClick={() => navigate('/customer/at-home-services')}>
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium text-[#4e342e]">{service.name}</h4>
+                          <h4 className="font-medium text-[#4e342e] hover:text-[#3b2c26] transition-colors">{service.name}</h4>
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => removeFromCart(service.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeFromCart(service.id);
+                            }}
                             className="text-red-500 hover:text-red-600"
                           >
                             ×
@@ -303,7 +306,10 @@ const AtHomeServicesPage = () => {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => updateQuantity(service.id, service.quantity - 1)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQuantity(service.id, service.quantity - 1);
+                              }}
                               className="w-6 h-6 p-0"
                             >
                               -
@@ -312,7 +318,10 @@ const AtHomeServicesPage = () => {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => updateQuantity(service.id, service.quantity + 1)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQuantity(service.id, service.quantity + 1);
+                              }}
                               className="w-6 h-6 p-0"
                             >
                               +
@@ -340,7 +349,7 @@ const AtHomeServicesPage = () => {
                     </div>
 
                     <Button 
-                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white mt-4"
+                      className="w-full bg-gradient-to-r from-[#4e342e] to-[#6d4c41] hover:from-[#3b2c26] hover:to-[#5a3520] text-white mt-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                       onClick={proceedToBooking}
                     >
                       Proceed to Booking

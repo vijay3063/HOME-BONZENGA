@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,9 +10,16 @@ import LanguageToggle from '@/components/LanguageToggle';
 
 // Assets
 import hero3 from '@/assets/hero3.jpg';
+import hero2 from '@/assets/hero2.jpg';
+import bridal_makeup from '@/assets/bridal_makeup.jpg';
+import makeup1 from '@/assets/makeup1.jpg';
+import hair9 from '@/assets/hair9.jpg';
 import hair4 from '@/assets/hair4.jpg';
 import makeup5 from '@/assets/makeup5.jpg';
+import makeup4 from '@/assets/makeup4.jpg';
 import spa1 from '@/assets/spa1.jpg';
+import spa from '@/assets/spa.jpg';
+import spa_product from '@/assets/spa_product.jpg';
 import nail from '@/assets/nail.jpg';
 import logo from '@/assets/logo.jpg';
 
@@ -45,6 +52,53 @@ import {
 const LandingPage = () => {
   const { t, ready } = useTranslation();
   const [email, setEmail] = useState('');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+
+  // Slider images array using imported assets
+  const sliderImages = [
+    bridal_makeup,
+    hair9,
+    hero3,
+    hero2,
+    makeup1
+  ];
+
+
+  // Auto-rotate images every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [sliderImages.length]);
+
+  // Handle hash navigation for navbar links
+  useEffect(() => {
+    const handleHashNavigation = () => {
+      const hash = window.location.hash.substring(1); // Remove the # symbol
+      if (hash) {
+        // Wait a bit for the page to render
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    };
+
+    // Handle initial hash
+    handleHashNavigation();
+
+    // Handle hash changes
+    window.addEventListener('hashchange', handleHashNavigation);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashNavigation);
+    };
+  }, []);
 
   // Wait for i18n to be ready
   if (!ready) {
@@ -74,7 +128,7 @@ const LandingPage = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-[#fdf6f0] pt-20">
+      <section id="home" className="relative min-h-screen flex items-center bg-[#fdf6f0] pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -127,7 +181,7 @@ const LandingPage = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right Content - Hero Image with Darker Overlay */}
+            {/* Right Content - Hero Image Slider */}
             <motion.div 
               className="relative"
               initial={{ opacity: 0, x: 50 }}
@@ -135,13 +189,35 @@ const LandingPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src={hero3}
-                  alt="Professional Beauty Services"
-                  className="w-full h-[600px] object-cover"
-                />
-                {/* Darker overlay as requested */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-black/20" />
+                {/* Working image slider with auto-rotation */}
+                <div className="h-[600px] relative overflow-hidden">
+                  {sliderImages.map((imagePath, index) => (
+                    <img 
+                      key={index}
+                      src={imagePath} 
+                      alt={`Hero Image ${index + 1}`} 
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                        index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                      }`}
+                      onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
+                      onError={(e) => console.error(`Image ${index + 1} failed to load:`, e)}
+                    />
+                  ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  
+                  {/* Navigation dots */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    {sliderImages.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                        }`}
+                        onClick={() => setCurrentImageIndex(index)}
+                      />
+                    ))}
+                  </div>
+                </div>
                 
                 {/* Floating Badge */}
                 <motion.div 
@@ -198,7 +274,7 @@ const LandingPage = () => {
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={makeup5}
+                    src={makeup4}
                     alt="At-Home Beauty Services"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -237,7 +313,7 @@ const LandingPage = () => {
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={spa1}
+                    src={spa_product}
                     alt="Salon Beauty Services"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -289,13 +365,13 @@ const LandingPage = () => {
               {
                 title: t('home.services.categories.face.title'),
                 description: t('home.services.categories.face.description'),
-                image: makeup5,
+                image: spa1,
                 icon: Sparkles,
               },
               {
                 title: t('home.services.categories.extras.title'),
                 description: t('home.services.categories.extras.description'),
-                image: spa1,
+                image: nail,
                 icon: Heart,
               }
             ].map((service, index) => (
