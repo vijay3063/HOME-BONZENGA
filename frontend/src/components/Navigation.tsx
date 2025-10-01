@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
@@ -22,6 +22,7 @@ const Navigation = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   // Calculate search box width based on user state and screen size
@@ -43,15 +44,38 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle hash navigation when landing on the home page
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const sectionId = location.hash.substring(1); // Remove the # symbol
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Small delay to ensure the page is rendered
+    }
+  }, [location]);
+
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
   const scrollToSection = (sectionId: string) => {
+    // If we're not on the landing page, navigate to it first
+    if (location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      setIsOpen(false);
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If element not found, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     setIsOpen(false);
   };
@@ -70,13 +94,13 @@ const Navigation = () => {
   return (
     <header className="fixed top-0 z-50 w-full">
       {/* Main Navigation */}
-      <nav className={`w-full px-4 lg:px-8 h-20 flex items-center justify-between transition-all duration-300 ${
+      <nav className={`w-full px-4 lg:px-8 h-20 flex items-center transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-[#f8d7da]/30' 
           : 'bg-[#fdf6f0]/95 backdrop-blur-sm'
       }`}>
-        {/* Logo */}
-        <div className="flex items-center">
+        {/* Logo Section */}
+        <div className="flex items-center flex-shrink-0">
           <Link to="/" className="flex items-center space-x-3">
             <img
               src={logo}
@@ -90,8 +114,8 @@ const Navigation = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-6 flex-shrink-0">
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center mx-8">
           {user ? (
             <RoleNavigation />
           ) : (
@@ -128,10 +152,10 @@ const Navigation = () => {
           )}
         </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-3 flex-1 justify-end">
-          {/* Search Box - Responsive width based on user state */}
-          <form onSubmit={handleSearch} className="flex items-center flex-shrink-0">
+        {/* Desktop Actions - Right Side */}
+        <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
+          {/* Search Box */}
+          <form onSubmit={handleSearch} className="flex items-center">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-5 h-5 font-bold drop-shadow-sm stroke-2" />
               <Input
@@ -145,7 +169,10 @@ const Navigation = () => {
           </form>
           
           {/* Language Toggle */}
-          <LanguageToggle />
+          <div className="flex items-center">
+            <LanguageToggle />
+          </div>
+          
           {user ? (
             <div className="flex items-center space-x-2 pl-3 border-l border-[#f8d7da]/50">
               <span className="text-sm text-[#6d4c41] font-medium font-sans">
@@ -176,8 +203,9 @@ const Navigation = () => {
 
         </div>
 
-        {/* Mobile Search Box - Visible on smaller screens */}
-        <div className="lg:hidden flex items-center">
+        {/* Mobile Actions */}
+        <div className="lg:hidden flex items-center space-x-3">
+          {/* Mobile Search Box */}
           <form onSubmit={handleSearch} className="flex items-center">
             <div className="relative">
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-800 w-4 h-4 font-bold drop-shadow-sm stroke-2" />
@@ -192,15 +220,15 @@ const Navigation = () => {
               />
             </div>
           </form>
-        </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 rounded-lg bg-[#f8d7da]/20 hover:bg-[#f8d7da]/30 transition-colors ml-2"
-        >
-          {isOpen ? <X className="w-5 h-5 text-[#4e342e]" /> : <Menu className="w-5 h-5 text-[#4e342e]" />}
-        </button>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-lg bg-[#f8d7da]/20 hover:bg-[#f8d7da]/30 transition-colors"
+          >
+            {isOpen ? <X className="w-5 h-5 text-[#4e342e]" /> : <Menu className="w-5 h-5 text-[#4e342e]" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu */}

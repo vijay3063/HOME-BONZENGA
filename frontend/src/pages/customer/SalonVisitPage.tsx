@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import DashboardLayout from '@/components/DashboardLayout';
+import { useAuth } from '@/contexts/AuthContext';
 import { 
   Building, 
   MapPin, 
@@ -22,6 +23,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useCart } from '@/contexts/CartContext';
+import { getMockData } from '@/utils/mockData';
 
 interface SalonService {
   id: string;
@@ -49,6 +51,7 @@ const SalonVisitPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { user } = useAuth();
   const [salons, setSalons] = useState<Salon[]>([]);
   const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -61,8 +64,8 @@ const SalonVisitPage = () => {
   const fetchSalons = async () => {
     try {
       setLoading(true);
-      const mockData = await import('@/mockData/customers.json');
-      setSalons(mockData.default.services.salon);
+      const mockData = getMockData.customers();
+      setSalons(mockData.services.salon);
     } catch (error) {
       console.error('Error loading salons:', error);
       toast.error('Failed to load salons');
@@ -146,6 +149,16 @@ const SalonVisitPage = () => {
   const proceedToBooking = () => {
     if (selectedServices.length === 0) {
       toast.error('Please select at least one service');
+      return;
+    }
+    
+    // Check if user is authenticated
+    if (!user) {
+      // Store selected services in session storage for after login
+      sessionStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+      sessionStorage.setItem('redirectAfterLogin', '/customer/booking-confirmation');
+      toast.info('Please login to continue with your booking');
+      navigate('/login');
       return;
     }
     

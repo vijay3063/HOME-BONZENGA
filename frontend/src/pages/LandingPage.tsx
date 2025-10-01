@@ -74,7 +74,7 @@ const LandingPage = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-[#fdf6f0] pt-20">
+      <section id="home" className="relative min-h-screen flex items-center bg-[#fdf6f0] pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -109,13 +109,13 @@ const LandingPage = () => {
                 className="flex flex-col sm:flex-row gap-4"
                 variants={fadeInUp}
               >
-                <Link to="/customer/at-home-services">
+                <Link to="/at-home-services">
                   <Button className="bg-[#4e342e] hover:bg-[#3b2c26] text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <Home className="w-5 h-5 mr-2" />
                     {t('home.hero.bookAtHome')}
                     </Button>
                   </Link>
-                <Link to="/customer/salon-visit">
+                <Link to="/salon-visit">
                   <Button 
                     variant="outline" 
                     className="border-2 border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
@@ -221,7 +221,7 @@ const LandingPage = () => {
                     {t('home.services.atHome.description')}
                   </p>
                   
-                  <Link to="/customer/at-home-services">
+                  <Link to="/at-home-services">
                     <Button className="bg-[#4e342e] hover:bg-[#3b2c26] text-white px-10 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full">
                       {t('home.services.atHome.button')}
                       <ArrowRight className="w-5 h-5 ml-2" />
@@ -260,7 +260,7 @@ const LandingPage = () => {
                     {t('home.services.salon.description')}
                   </p>
                   
-                  <Link to="/customer/salon-visit">
+                  <Link to="/salon-visit">
                     <Button className="bg-[#4e342e] hover:bg-[#3b2c26] text-white px-10 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full">
                       {t('home.services.salon.button')}
                       <ArrowRight className="w-5 h-5 ml-2" />

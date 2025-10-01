@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import DashboardLayout from '@/components/DashboardLayout';
+import { useAuth } from '@/contexts/AuthContext';
 import { 
   Home, 
   Scissors, 
@@ -23,6 +24,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useCart } from '@/contexts/CartContext';
+import { getMockData } from '@/utils/mockData';
 
 interface Service {
   id: string;
@@ -41,6 +43,7 @@ const AtHomeServicesPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { user } = useAuth();
   const [services, setServices] = useState<{ [key: string]: Service[] }>({});
   const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,8 +57,8 @@ const AtHomeServicesPage = () => {
   const fetchServices = async () => {
     try {
       setLoading(true);
-      const mockData = await import('@/mockData/customers.json');
-      setServices(mockData.default.services.atHome);
+      const mockData = getMockData.customers();
+      setServices(mockData.services.atHome);
     } catch (error) {
       console.error('Error loading services:', error);
       toast.error('Failed to load services');
@@ -146,6 +149,16 @@ const AtHomeServicesPage = () => {
   const proceedToBooking = () => {
     if (selectedServices.length === 0) {
       toast.error('Please select at least one service');
+      return;
+    }
+    
+    // Check if user is authenticated
+    if (!user) {
+      // Store selected services in session storage for after login
+      sessionStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+      sessionStorage.setItem('redirectAfterLogin', '/customer/booking-confirmation');
+      toast.info('Please login to continue with your booking');
+      navigate('/login');
       return;
     }
     
