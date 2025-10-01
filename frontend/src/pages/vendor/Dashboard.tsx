@@ -195,72 +195,72 @@ const VendorDashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-[#6d4c41] mb-1">New Bookings</p>
                   <p className="text-2xl font-bold text-[#4e342e]">{stats?.newBookings || 0}</p>
                   <div className="flex items-center mt-2">
-                    <Bell className="w-4 h-4 text-orange-500 mr-1" />
-                    <span className="text-sm text-orange-600">{stats?.pendingBookings || 0} pending</span>
+                    <Bell className="w-4 h-4 text-[#6d4c41] mr-1" />
+                    <span className="text-sm text-[#6d4c41]">{stats?.pendingBookings || 0} pending</span>
                   </div>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-[#6d4c41] mb-1">Completed Services</p>
                   <p className="text-2xl font-bold text-[#4e342e]">{stats?.completedServices || 0}</p>
                   <div className="flex items-center mt-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
-                    <span className="text-sm text-green-600">This month</span>
+                    <CheckCircle className="w-4 h-4 text-[#6d4c41] mr-1" />
+                    <span className="text-sm text-[#6d4c41]">This month</span>
                   </div>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-[#6d4c41] mb-1">Monthly Revenue</p>
                   <p className="text-2xl font-bold text-[#4e342e]">${stats?.monthlyRevenue || 0}</p>
                   <div className="flex items-center mt-2">
-                    <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
-                    <span className="text-sm text-green-600">+12.5% from last month</span>
+                    <TrendingUp className="w-4 h-4 text-[#6d4c41] mr-1" />
+                    <span className="text-sm text-[#6d4c41]">+12.5% from last month</span>
                   </div>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                   <DollarSign className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-[#6d4c41] mb-1">Total Customers</p>
                   <p className="text-2xl font-bold text-[#4e342e]">{stats?.totalCustomers || 0}</p>
                   <div className="flex items-center mt-2">
-                    <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                    <span className="text-sm text-yellow-600">{stats?.averageRating || 0} avg rating</span>
+                    <Star className="w-4 h-4 text-[#6d4c41] mr-1" />
+                    <span className="text-sm text-[#6d4c41]">{stats?.averageRating || 0} avg rating</span>
                   </div>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
               </div>
@@ -398,8 +398,8 @@ const VendorDashboard = () => {
                       </div>
                       <Badge className={`px-2 py-1 text-xs ${
                         service.isActive 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-[#f8d7da]/30 text-[#4e342e]' 
+                          : 'bg-[#6d4c41]/20 text-[#6d4c41]'
                       }`}>
                         {service.isActive ? 'Active' : 'Inactive'}
                       </Badge>
@@ -433,7 +433,7 @@ const VendorDashboard = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-[#6d4c41]">Customer Rating</span>
                     <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                      <Star className="w-4 h-4 text-[#6d4c41] fill-current" />
                       <span className="font-semibold text-[#4e342e]">{stats?.averageRating || 0}</span>
                     </div>
                   </div>

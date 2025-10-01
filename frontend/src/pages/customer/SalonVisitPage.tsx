@@ -192,40 +192,40 @@ const SalonVisitPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="container mx-auto py-8 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-serif font-bold text-[#4e342e] mb-4">
+      <div className="container mx-auto py-4 sm:py-6 lg:py-8 px-3 sm:px-4">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4e342e] mb-2 sm:mb-4">
             Salon Visits
           </h1>
-          <p className="text-lg text-[#6d4c41]">
+          <p className="text-base sm:text-lg text-[#6d4c41]">
             Book appointments at verified salons near you
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Salons Section */}
           <div className="lg:col-span-3">
             {/* Search */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search salons or services..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 text-sm sm:text-base"
                 />
               </div>
             </div>
 
             {/* Salons List */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {filteredSalons().map((salon) => (
                 <Card key={salon.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-2xl font-serif text-[#4e342e] mb-2">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <CardTitle className="text-xl sm:text-2xl font-serif text-[#4e342e] mb-2 leading-tight">
                           {salon.name}
                         </CardTitle>
                         <div className="flex items-center gap-4 text-[#6d4c41]">

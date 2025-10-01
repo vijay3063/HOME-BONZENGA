@@ -308,75 +308,75 @@ const AdminDashboard = () => {
         {/* Stats Cards */}
         {stats && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Users</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.totalUsers.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-green-100 text-green-800 text-xs">
+                      <Badge className="bg-[#f8d7da]/30 text-[#4e342e] text-xs">
                         {stats.activeUsers} Active
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Vendors</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.totalVendors.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">
+                      <Badge className="bg-[#6d4c41]/20 text-[#6d4c41] text-xs">
                         {stats.pendingVendors} Pending
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <Building className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Managers</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.totalManagers.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-blue-100 text-blue-800 text-xs">
+                      <Badge className="bg-[#f8d7da]/30 text-[#4e342e] text-xs">
                         {stats.totalManagers} Active
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <UserCheck className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Revenue</p>
                     <p className="text-2xl font-bold text-[#4e342e]">${stats.totalRevenue.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
-                      <span className="text-sm text-green-600">${stats.monthlyRevenue} this month</span>
+                      <TrendingUp className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">${stats.monthlyRevenue} this month</span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <DollarSign className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -388,75 +388,75 @@ const AdminDashboard = () => {
         {/* Additional Stats Row */}
         {stats && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Pending Approvals</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.pendingApprovals}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">
+                      <Badge className="bg-[#6d4c41]/20 text-[#6d4c41] text-xs">
                         Requires Action
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <AlertCircle className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Bookings</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.totalBookings.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
-                      <span className="text-sm text-green-600">{stats.completedBookings} completed</span>
+                      <CheckCircle className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">{stats.completedBookings} completed</span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <Calendar className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Pending Payouts</p>
                     <p className="text-2xl font-bold text-[#4e342e]">${stats.pendingPayouts.toLocaleString()}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-orange-100 text-orange-800 text-xs">
+                      <Badge className="bg-[#6d4c41]/20 text-[#6d4c41] text-xs">
                         Awaiting Approval
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <CreditCard className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Refund Requests</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.refundRequests}</p>
                     <div className="flex items-center mt-2">
-                      <Badge className="bg-red-100 text-red-800 text-xs">
+                      <Badge className="bg-[#6d4c41]/20 text-[#6d4c41] text-xs">
                         Needs Review
                       </Badge>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <RefreshCw className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -466,94 +466,7 @@ const AdminDashboard = () => {
         )}
 
         {/* Quick Actions */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-serif font-bold text-[#4e342e] mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link to="/admin/users">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <Users className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">User Management</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Manage user accounts and permissions
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/vendors">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <Building className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Vendor Management</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Approve and manage vendor accounts
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/managers">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <UserCheck className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Manager Oversight</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Manage manager accounts and actions
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/beauticians">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <Sparkles className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Beautician Management</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Final approval and management
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/financials">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <DollarSign className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Financials</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Manage commissions and payouts
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/reports">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <BarChart3 className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Reports & Analytics</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    View platform analytics and insights
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/settings">
-              <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all cursor-pointer group">
-                <CardContent className="p-6 text-center">
-                  <Settings className="w-8 h-8 text-[#4e342e] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="font-semibold mb-2 text-[#4e342e]">Platform Settings</h3>
-                  <p className="text-sm text-[#6d4c41]">
-                    Configure platform-wide settings
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
+        
 
         {/* Final Beautician Approvals */}
         <div className="mb-8">
@@ -640,7 +553,7 @@ const AdminDashboard = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-serif font-bold text-[#4e342e]">Recent Activity</h2>
-            <Link to="/admin/reports">
+            <Link to="/admin/activities">
               <Button variant="outline" className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white">
                 <Eye className="w-4 h-4 mr-2" />
                 View All Activity
@@ -684,46 +597,7 @@ const AdminDashboard = () => {
           </Card>
         </div>
 
-        {/* Top Performing Vendors */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-serif font-bold text-[#4e342e] mb-4">Top Performing Vendors</h2>
-          <Card className="border-0 bg-white shadow-lg">
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                {topVendors.map((vendor, index) => (
-                  <div key={vendor.id} className="flex items-center justify-between p-4 bg-[#f8d7da]/20 rounded-lg">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-8 h-8 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                        {index + 1}
-                      </div>
-                      <div>
-                        <p className="font-medium text-[#4e342e]">{vendor.shopName}</p>
-                        <p className="text-sm text-[#6d4c41]">{vendor.businessType}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-[#4e342e]">${vendor.totalRevenue.toLocaleString()}</p>
-                      <p className="text-sm text-[#6d4c41]">{vendor.totalBookings} bookings</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center space-x-1">
-                        <Star className="w-4 h-4 text-yellow-500" />
-                        <span className="text-sm font-medium text-[#4e342e]">{vendor.averageRating}</span>
-                      </div>
-                      <Badge className={`text-xs ${
-                        vendor.status === 'APPROVED' ? 'bg-green-100 text-green-800' :
-                        vendor.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-red-100 text-red-800'
-                      }`}>
-                        {vendor.status}
-                      </Badge>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
 
         {/* System Health */}
         <div className="mb-8">

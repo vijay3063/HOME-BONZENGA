@@ -181,50 +181,52 @@ const AtHomeServicesPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="container mx-auto py-8 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-serif font-bold text-[#4e342e] mb-4">
+      <div className="container mx-auto py-4 sm:py-6 lg:py-8 px-3 sm:px-4">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4e342e] mb-2 sm:mb-4">
             At-Home Beauty Services
           </h1>
-          <p className="text-lg text-[#6d4c41]">
+          <p className="text-base sm:text-lg text-[#6d4c41]">
             Professional beauty services delivered to your doorstep
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Services Section */}
           <div className="lg:col-span-3">
             {/* Search and Filter */}
-            <div className="mb-6">
-              <div className="flex flex-col md:flex-row gap-4 mb-6">
+            <div className="mb-4 sm:mb-6">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <div className="relative flex-grow">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     placeholder="Search services..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-sm sm:text-base"
                   />
                 </div>
               </div>
 
               {/* Category Filter */}
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                 {categories.map((category) => {
                   const Icon = category.icon;
                   return (
                     <Button
                       key={category.key}
                       variant={selectedCategory === category.key ? "default" : "outline"}
-                      className={`flex items-center gap-2 ${
+                      size="sm"
+                      className={`flex items-center gap-1 sm:gap-2 text-xs sm:text-sm ${
                         selectedCategory === category.key
                           ? "bg-[#4e342e] text-white"
                           : "border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
                       }`}
                       onClick={() => setSelectedCategory(category.key)}
                     >
-                      <Icon className="w-4 h-4" />
-                      {category.label}
+                      <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline">{category.label}</span>
+                      <span className="xs:hidden">{category.label.split(' ')[0]}</span>
                     </Button>
                   );
                 })}
@@ -232,37 +234,37 @@ const AtHomeServicesPage = () => {
             </div>
 
             {/* Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {filteredServices().map((service) => (
                 <Card key={service.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-xl font-serif text-[#4e342e]">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <CardTitle className="text-lg sm:text-xl font-serif text-[#4e342e] leading-tight">
                         {service.name}
                       </CardTitle>
-                      <Badge variant="secondary" className="bg-[#fdf6f0] text-[#4e342e]">
+                      <Badge variant="secondary" className="bg-[#fdf6f0] text-[#4e342e] text-xs shrink-0">
                         {service.category}
                       </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-[#6d4c41] mb-4">{service.description}</p>
+                  <CardContent className="pt-0">
+                    <p className="text-[#6d4c41] mb-3 sm:mb-4 text-sm sm:text-base">{service.description}</p>
                     
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-4 text-sm text-[#6d4c41]">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                      <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#6d4c41]">
                         <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                           {service.duration} min
                         </div>
                         <div className="flex items-center gap-1">
-                          <DollarSign className="w-4 h-4" />
+                          <DollarSign className="w-3 h-3 sm:w-4 sm:h-4" />
                           {service.price.toLocaleString()} CDF
                         </div>
                       </div>
                     </div>
 
                     <Button 
-                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white"
+                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white text-sm sm:text-base"
                       onClick={() => addToCart(service)}
                     >
                       Add to Cart
@@ -283,57 +285,57 @@ const AtHomeServicesPage = () => {
 
           {/* Cart Sidebar */}
           <div className="lg:col-span-1">
-            <Card className="border-0 shadow-lg sticky top-8">
-              <CardHeader>
-                <CardTitle className="text-xl font-serif text-[#4e342e]">
+            <Card className="border-0 shadow-lg sticky top-4 sm:top-8">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg sm:text-xl font-serif text-[#4e342e]">
                   Selected Services
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 {selectedServices.length === 0 ? (
-                  <p className="text-[#6d4c41] text-center py-4">
+                  <p className="text-[#6d4c41] text-center py-4 text-sm sm:text-base">
                     No services selected
                   </p>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {selectedServices.map((service) => (
-                      <div key={service.id} className="border-b border-[#fdf6f0] pb-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium text-[#4e342e]">{service.name}</h4>
+                      <div key={service.id} className="border-b border-[#fdf6f0] pb-3 sm:pb-4">
+                        <div className="flex items-start justify-between mb-2 gap-2">
+                          <h4 className="font-medium text-[#4e342e] text-sm sm:text-base leading-tight">{service.name}</h4>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => removeFromCart(service.id)}
-                            className="text-red-500 hover:text-red-600"
+                            className="text-red-500 hover:text-red-600 shrink-0 p-1"
                           >
                             ×
                           </Button>
                         </div>
                         
-                        <div className="flex items-center justify-between text-sm text-[#6d4c41] mb-2">
+                        <div className="flex items-center justify-between text-xs sm:text-sm text-[#6d4c41] mb-2">
                           <span>{service.price.toLocaleString()} CDF</span>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 sm:gap-2">
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => updateQuantity(service.id, service.quantity - 1)}
-                              className="w-6 h-6 p-0"
+                              className="w-5 h-5 sm:w-6 sm:h-6 p-0 text-xs"
                             >
                               -
                             </Button>
-                            <span className="w-8 text-center">{service.quantity}</span>
+                            <span className="w-6 sm:w-8 text-center text-xs sm:text-sm">{service.quantity}</span>
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => updateQuantity(service.id, service.quantity + 1)}
-                              className="w-6 h-6 p-0"
+                              className="w-5 h-5 sm:w-6 sm:h-6 p-0 text-xs"
                             >
                               +
                             </Button>
                           </div>
                         </div>
                         
-                        <div className="text-sm font-medium text-[#4e342e]">
+                        <div className="text-xs sm:text-sm font-medium text-[#4e342e]">
                           Total: {(service.price * service.quantity).toLocaleString()} CDF
                         </div>
                       </div>
@@ -342,21 +344,22 @@ const AtHomeServicesPage = () => {
                     <Separator />
 
                     <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-xs sm:text-sm">
                         <span className="text-[#6d4c41]">Total Duration:</span>
                         <span className="font-medium text-[#4e342e]">{getTotalDuration()} min</span>
                       </div>
-                      <div className="flex justify-between text-lg font-semibold">
+                      <div className="flex justify-between text-base sm:text-lg font-semibold">
                         <span className="text-[#4e342e]">Total Price:</span>
                         <span className="text-[#4e342e]">{getTotalPrice().toLocaleString()} CDF</span>
                       </div>
                     </div>
 
                     <Button 
-                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white mt-4"
+                      className="w-full bg-[#4e342e] hover:bg-[#3b2c26] text-white mt-3 sm:mt-4 text-sm sm:text-base"
                       onClick={proceedToBooking}
                     >
-                      Proceed to Booking
+                      <span className="hidden sm:inline">Proceed to Booking</span>
+                      <span className="sm:hidden">Book Now</span>
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </div>

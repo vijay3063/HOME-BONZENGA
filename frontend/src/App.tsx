@@ -26,12 +26,14 @@ import VendorRevenue from "@/pages/vendor/RevenuePage";
 import VendorProfile from "@/pages/vendor/ProfilePage";
 import VendorRegistrationPage from "@/pages/auth/VendorRegistrationPage";
 import AdminDashboard from "@/pages/admin/Dashboard";
+import AdminActivitiesPage from "@/pages/admin/ActivitiesPage";
 import SearchPage from "@/pages/customer/SearchPage";
 import VendorDetailsPage from "@/pages/customer/VendorDetailsPage";
 import BookingCheckoutPage from "@/pages/customer/BookingCheckoutPage";
 import BookingSuccessPage from "@/pages/customer/BookingSuccessPage";
 import BeauticianDashboard from "@/pages/beautician/Dashboard";
 import BeauticianProfilePage from "@/pages/beautician/ProfilePage";
+import AssignedAppointmentsPage from "@/pages/beautician/AssignedAppointmentsPage";
 import BeauticianRegistrationPage from "@/pages/auth/BeauticianRegistrationPage";
 import ManagerDashboard from "@/pages/manager/Dashboard";
 import VendorRegisterPage from "@/pages/vendor/RegisterPage";
@@ -227,7 +229,7 @@ const App = () => (
                   path="/beautician/appointments"
                   element={
                     <ProtectedRoute allowedRoles={["BEAUTICIAN"]}>
-                      <BeauticianDashboard />
+                      <AssignedAppointmentsPage />
                     </ProtectedRoute>
                   }
                 />
@@ -292,6 +294,14 @@ const App = () => (
                   element={
                     <ProtectedRoute allowedRoles={["ADMIN"]}>
                       <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/activities"
+                  element={
+                    <ProtectedRoute allowedRoles={["ADMIN"]}>
+                      <AdminActivitiesPage />
                     </ProtectedRoute>
                   }
                 />

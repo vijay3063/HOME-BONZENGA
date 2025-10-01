@@ -238,34 +238,34 @@ const CustomerProfilePage = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-[#fdf6f0] p-6">
+      <div className="min-h-screen bg-[#fdf6f0] p-3 sm:p-4 lg:p-6">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-serif font-bold text-[#4e342e]">
+                <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4e342e]">
                   My Profile
                 </h1>
-                <p className="text-[#6d4c41] mt-2">
+                <p className="text-base sm:text-lg text-[#6d4c41] mt-1 sm:mt-2">
                   Manage your personal information and preferences
                 </p>
               </div>
-              <div className="flex space-x-3">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                 {!isEditing ? (
                   <Button
                     onClick={() => setIsEditing(true)}
-                    className="bg-[#4e342e] hover:bg-[#3b2c26] text-white"
+                    className="bg-[#4e342e] hover:bg-[#3b2c26] text-white text-sm sm:text-base w-full sm:w-auto"
                   >
                     <Edit className="w-4 h-4 mr-2" />
                     Edit Profile
                   </Button>
                 ) : (
-                  <div className="flex space-x-2">
+                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                     <Button
                       onClick={handleSave}
                       disabled={isSaving}
-                      className="bg-green-600 hover:bg-green-700 text-white"
+                      className="bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base w-full sm:w-auto"
                     >
                       {isSaving ? (
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -277,7 +277,7 @@ const CustomerProfilePage = () => {
                     <Button
                       onClick={handleCancel}
                       variant="outline"
-                      className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
+                      className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white text-sm sm:text-base w-full sm:w-auto"
                     >
                       <X className="w-4 h-4 mr-2" />
                       Cancel
@@ -288,20 +288,20 @@ const CustomerProfilePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Personal Information */}
             <div className="lg:col-span-2">
               <Card className="border-0 bg-white shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl font-serif font-bold text-[#4e342e] flex items-center">
-                    <User className="w-5 h-5 mr-2" />
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg sm:text-xl font-serif font-bold text-[#4e342e] flex items-center">
+                    <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Personal Information
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <CardContent className="space-y-4 sm:space-y-6 pt-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <Label htmlFor="firstName" className="text-[#6d4c41] font-medium">
+                      <Label htmlFor="firstName" className="text-[#6d4c41] font-medium text-sm sm:text-base">
                         First Name
                       </Label>
                       {isEditing ? (
@@ -309,14 +309,14 @@ const CustomerProfilePage = () => {
                           id="firstName"
                           value={editForm.firstName}
                           onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })}
-                          className="mt-1"
+                          className="mt-1 text-sm sm:text-base"
                         />
                       ) : (
-                        <p className="mt-1 text-[#4e342e] font-medium">{profile.firstName}</p>
+                        <p className="mt-1 text-[#4e342e] font-medium text-sm sm:text-base">{profile.firstName}</p>
                       )}
                     </div>
                     <div>
-                      <Label htmlFor="lastName" className="text-[#6d4c41] font-medium">
+                      <Label htmlFor="lastName" className="text-[#6d4c41] font-medium text-sm sm:text-base">
                         Last Name
                       </Label>
                       {isEditing ? (
@@ -324,10 +324,10 @@ const CustomerProfilePage = () => {
                           id="lastName"
                           value={editForm.lastName}
                           onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })}
-                          className="mt-1"
+                          className="mt-1 text-sm sm:text-base"
                         />
                       ) : (
-                        <p className="mt-1 text-[#4e342e] font-medium">{profile.lastName}</p>
+                        <p className="mt-1 text-[#4e342e] font-medium text-sm sm:text-base">{profile.lastName}</p>
                       )}
                     </div>
                   </div>
@@ -467,37 +467,6 @@ const CustomerProfilePage = () => {
                       {new Date(profile.updatedAt).toLocaleDateString()}
                     </span>
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* Payment Methods */}
-              <Card className="border-0 bg-white shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-lg font-serif font-bold text-[#4e342e] flex items-center">
-                    <CreditCard className="w-5 h-5 mr-2" />
-                    Payment Methods
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {profile.paymentMethods.map((method) => (
-                    <div key={method.id} className="flex items-center justify-between p-3 bg-[#fdf6f0] rounded-lg">
-                      <div className="flex items-center">
-                        <CreditCard className="w-4 h-4 mr-2 text-[#6d4c41]" />
-                        <div>
-                          <p className="text-[#4e342e] font-medium">
-                            {method.type === 'card' ? method.brand : 'Mobile Money'} •••• {method.lastFour}
-                          </p>
-                          <p className="text-sm text-[#6d4c41] capitalize">{method.type}</p>
-                        </div>
-                      </div>
-                      {method.isDefault && (
-                        <Badge className="bg-green-100 text-green-800">Default</Badge>
-                      )}
-                    </div>
-                  ))}
-                  <Button variant="outline" className="w-full border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white">
-                    Add Payment Method
-                  </Button>
                 </CardContent>
               </Card>
             </div>

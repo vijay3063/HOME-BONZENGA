@@ -251,98 +251,100 @@ Thank you for choosing Home Bonzenga!
 
   return (
     <DashboardLayout>
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto py-4 sm:py-6 lg:py-8 px-3 sm:px-4">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-serif font-bold text-[#4e342e] mb-2">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4e342e] mb-2">
             Welcome back, {user?.firstName || 'Customer'}!
           </h1>
-          <p className="text-lg text-[#6d4c41]">
+          <p className="text-base sm:text-lg text-[#6d4c41]">
             Manage your beauty service bookings and track your orders
           </p>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
           <Button 
-            className="h-20 bg-[#4e342e] hover:bg-[#3b2c26] text-white text-lg"
+            className="h-16 sm:h-20 bg-[#4e342e] hover:bg-[#3b2c26] text-white text-base sm:text-lg"
             onClick={() => navigate('/customer/at-home-services')}
           >
-            <Home className="w-6 h-6 mr-3" />
-            Book At-Home Service
+            <Home className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+            <span className="hidden xs:inline">Book At-Home Service</span>
+            <span className="xs:hidden">At-Home Service</span>
           </Button>
           <Button 
             variant="outline"
-            className="h-20 border-2 border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white text-lg"
+            className="h-16 sm:h-20 border-2 border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white text-base sm:text-lg"
             onClick={() => navigate('/customer/salon-visit')}
           >
-            <Building className="w-6 h-6 mr-3" />
-            Visit a Salon
+            <Building className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+            <span className="hidden xs:inline">Visit a Salon</span>
+            <span className="xs:hidden">Salon Visit</span>
           </Button>
         </div>
 
         {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
+              <CardContent className="p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-[#6d4c41]">Active Bookings</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{stats.activeBookings}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Active Bookings</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{stats.activeBookings}</p>
                   </div>
-                  <Calendar className="w-8 h-8 text-[#4e342e]" />
+                  <Calendar className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-[#4e342e]" />
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
+              <CardContent className="p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-[#6d4c41]">Completed</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{stats.completedBookings}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Completed</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{stats.completedBookings}</p>
                   </div>
-                  <CheckCircle className="w-8 h-8 text-green-600" />
+                  <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600" />
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
+              <CardContent className="p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-[#6d4c41]">Pending Payments</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{stats.pendingPayments}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Pending Payments</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{stats.pendingPayments}</p>
                   </div>
-                  <AlertCircle className="w-8 h-8 text-yellow-600" />
+                  <AlertCircle className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-yellow-600" />
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
+              <CardContent className="p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-[#6d4c41]">Total Bookings</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{stats.totalBookings}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Total Bookings</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{stats.totalBookings}</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-[#4e342e]" />
+                  <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-[#4e342e]" />
                 </div>
               </CardContent>
             </Card>
 
             {/* Cart Summary */}
-            <Card className="border-0 shadow-lg md:col-span-2 lg:col-span-4">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
+            <Card className="border-0 shadow-lg col-span-2 lg:col-span-4">
+              <CardContent className="p-3 sm:p-4 lg:p-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                   <div>
-                    <p className="text-sm font-medium text-[#6d4c41]">Cart</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{totalItems} item{totalItems !== 1 ? 's' : ''}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Cart</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{totalItems} item{totalItems !== 1 ? 's' : ''}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-[#6d4c41]">Estimated Total</p>
-                    <p className="text-2xl font-bold text-[#4e342e]">{totalPrice.toLocaleString()} CDF</p>
+                  <div className="text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium text-[#6d4c41]">Estimated Total</p>
+                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#4e342e]">{totalPrice.toLocaleString()} CDF</p>
                   </div>
                 </div>
                 {cartItems.length > 0 && (
@@ -386,18 +388,19 @@ Thank you for choosing Home Bonzenga!
                     ))}
                   </div>
                 )}
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button 
-                    className="bg-[#4e342e] hover:bg-[#3b2c26] text-white"
+                    className="bg-[#4e342e] hover:bg-[#3b2c26] text-white text-sm sm:text-base"
                     onClick={() => navigate('/customer/at-home-services')}
                   >
                     <Plus className="w-4 h-4 mr-2" />
-                    Add More Services
+                    <span className="hidden sm:inline">Add More Services</span>
+                    <span className="sm:hidden">Add Services</span>
                   </Button>
                   {cartItems.length > 0 && (
                     <Button 
                       variant="outline"
-                      className="border-red-300 text-red-600 hover:bg-red-50"
+                      className="border-red-300 text-red-600 hover:bg-red-50 text-sm sm:text-base"
                       onClick={() => clearCart()}
                     >
                       Clear Cart
@@ -405,10 +408,11 @@ Thank you for choosing Home Bonzenga!
                   )}
                   <Button 
                     variant="outline"
-                    className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
+                    className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white text-sm sm:text-base"
                     onClick={() => navigate('/customer/booking-confirmation')}
                   >
-                    Proceed to Booking
+                    <span className="hidden sm:inline">Proceed to Booking</span>
+                    <span className="sm:hidden">Book Now</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
@@ -418,11 +422,19 @@ Thank you for choosing Home Bonzenga!
         )}
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="bookings" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="bookings">My Bookings</TabsTrigger>
-            <TabsTrigger value="tracking">Order Tracking</TabsTrigger>
-            <TabsTrigger value="invoices">Invoices</TabsTrigger>
+        <Tabs defaultValue="bookings" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-3 h-auto">
+            <TabsTrigger value="bookings" className="text-xs sm:text-sm py-2 sm:py-3">
+              <span className="hidden sm:inline">My Bookings</span>
+              <span className="sm:hidden">Bookings</span>
+            </TabsTrigger>
+            <TabsTrigger value="tracking" className="text-xs sm:text-sm py-2 sm:py-3">
+              <span className="hidden sm:inline">Order Tracking</span>
+              <span className="sm:hidden">Tracking</span>
+            </TabsTrigger>
+            <TabsTrigger value="invoices" className="text-xs sm:text-sm py-2 sm:py-3">
+              Invoices
+            </TabsTrigger>
           </TabsList>
 
           {/* My Bookings Tab */}

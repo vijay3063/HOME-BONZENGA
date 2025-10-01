@@ -158,72 +158,78 @@ const BeauticianDashboard = () => {
                 Here's your beautician dashboard overview
               </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white">
-                <Settings className="w-4 h-4 mr-2" />
-                Settings
-              </Button>
-              <Button variant="outline" className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Profile
-              </Button>
-            </div>
           </div>
         </div>
 
         {/* Stats Cards */}
         {stats && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Upcoming Appointments</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.upcomingAppointments}</p>
+                    <div className="flex items-center mt-2">
+                      <Calendar className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">This week</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <Calendar className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Completed Services</p>
                     <p className="text-2xl font-bold text-[#4e342e]">{stats.completedServices}</p>
+                    <div className="flex items-center mt-2">
+                      <CheckCircle className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">This month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Total Earnings</p>
                     <p className="text-2xl font-bold text-[#4e342e]">${stats.totalEarnings}</p>
+                    <div className="flex items-center mt-2">
+                      <TrendingUp className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">+8.2% from last month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <DollarSign className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border-0 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-[#6d4c41]">Average Rating</p>
                     <p className="text-2xl font-bold text-[#4e342e]">4.8</p>
+                    <div className="flex items-center mt-2">
+                      <Star className="w-4 h-4 text-[#6d4c41] mr-1" />
+                      <span className="text-sm text-[#6d4c41]">avg rating</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-lg flex items-center justify-center">
                     <Star className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -275,9 +281,9 @@ const BeauticianDashboard = () => {
                       </div>
                       <div className="text-right">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          booking.status === 'Confirmed' ? 'bg-green-100 text-green-800' :
-                          booking.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-blue-100 text-blue-800'
+                          booking.status === 'Confirmed' ? 'bg-[#f8d7da]/30 text-[#4e342e]' :
+                          booking.status === 'Pending' ? 'bg-[#6d4c41]/20 text-[#6d4c41]' :
+                          'bg-[#f8d7da]/20 text-[#4e342e]'
                         }`}>
                           {booking.status}
                         </span>
@@ -292,36 +298,7 @@ const BeauticianDashboard = () => {
           {/* Profile & Quick Actions */}
           <div className="space-y-6">
             {/* Profile Card */}
-            <Card className="border-0 bg-white shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-xl font-serif font-bold text-[#4e342e]">
-                  Profile Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-[#4e342e] to-[#6d4c41] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-white">
-                      {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold text-[#4e342e]">{user?.firstName} {user?.lastName}</h3>
-                  <p className="text-sm text-[#6d4c41] capitalize">{user?.role?.toLowerCase()}</p>
-                </div>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center">
-                    <Mail className="w-4 h-4 text-[#6d4c41] mr-2" />
-                    <span className="text-[#6d4c41]">{user?.email}</span>
-                  </div>
-                  {user?.phone && (
-                    <div className="flex items-center">
-                      <Phone className="w-4 h-4 text-[#6d4c41] mr-2" />
-                      <span className="text-[#6d4c41]">{user.phone}</span>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            
 
             {/* Quick Actions */}
             <Card className="border-0 bg-white shadow-lg">

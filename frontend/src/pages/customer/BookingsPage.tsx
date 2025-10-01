@@ -287,37 +287,37 @@ const CustomerBookingsPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-[#fdf6f0] p-6">
+      <div className="min-h-screen bg-[#fdf6f0] p-3 sm:p-4 lg:p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-serif font-bold text-[#4e342e]">
+                <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#4e342e]">
                   My Bookings
                 </h1>
-                <p className="text-[#6d4c41] mt-2">
+                <p className="text-base sm:text-lg text-[#6d4c41] mt-1 sm:mt-2">
                   View and manage all your beauty service appointments
                 </p>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-[#6d4c41]">Total Bookings</p>
-                <p className="text-2xl font-bold text-[#4e342e]">{bookings.length}</p>
+              <div className="text-left sm:text-right">
+                <p className="text-xs sm:text-sm text-[#6d4c41]">Total Bookings</p>
+                <p className="text-xl sm:text-2xl font-bold text-[#4e342e]">{bookings.length}</p>
               </div>
             </div>
           </div>
 
           {/* Filters */}
-          <Card className="border-0 bg-white shadow-lg mb-6">
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card className="border-0 bg-white shadow-lg mb-4 sm:mb-6">
+            <CardContent className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6d4c41] w-4 h-4" />
                   <Input
                     placeholder="Search bookings..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 border-[#4e342e]/20 focus:border-[#4e342e]"
+                    className="pl-10 border-[#4e342e]/20 focus:border-[#4e342e] text-sm sm:text-base"
                   />
                 </div>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -362,41 +362,42 @@ const CustomerBookingsPage = () => {
           {/* Bookings Table */}
           {filteredBookings.length > 0 ? (
             <Card className="border-0 bg-white shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-xl font-serif font-bold text-[#4e342e] flex items-center">
-                  <Calendar className="w-5 h-5 mr-2" />
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg sm:text-xl font-serif font-bold text-[#4e342e] flex items-center">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Booking History ({filteredBookings.length})
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow className="border-[#4e342e]/10">
-                        <TableHead className="text-[#4e342e] font-semibold">Booking ID</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Service</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Beautician</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Date & Time</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Status</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Payment</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Total</TableHead>
-                        <TableHead className="text-[#4e342e] font-semibold">Actions</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Booking ID</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Service</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Beautician</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Date & Time</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Status</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Payment</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Total</TableHead>
+                        <TableHead className="text-[#4e342e] font-semibold text-xs sm:text-sm">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {filteredBookings.map((booking) => (
                         <TableRow key={booking.id} className="border-[#4e342e]/10 hover:bg-[#fdf6f0]/50">
-                          <TableCell className="font-medium text-[#4e342e]">
-                            {booking.bookingNumber}
+                          <TableCell className="font-medium text-[#4e342e] text-xs sm:text-sm">
+                            <span className="hidden sm:inline">{booking.bookingNumber}</span>
+                            <span className="sm:hidden">{booking.bookingNumber.slice(-6)}</span>
                           </TableCell>
                           <TableCell>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-1 sm:space-x-2">
                               {getServiceIcon(booking.serviceType)}
                               <div>
-                                <p className="font-medium text-[#4e342e] capitalize">
+                                <p className="font-medium text-[#4e342e] capitalize text-xs sm:text-sm">
                                   {booking.serviceType}
                                 </p>
-                                <p className="text-sm text-[#6d4c41]">
+                                <p className="text-xs text-[#6d4c41]">
                                   {booking.services.length} service{booking.services.length > 1 ? 's' : ''}
                                 </p>
                               </div>
@@ -404,29 +405,29 @@ const CustomerBookingsPage = () => {
                           </TableCell>
                           <TableCell>
                             {booking.beautician ? (
-                              <div className="flex items-center space-x-2">
-                                <User className="w-4 h-4 text-[#6d4c41]" />
+                              <div className="flex items-center space-x-1 sm:space-x-2">
+                                <User className="w-3 h-3 sm:w-4 sm:h-4 text-[#6d4c41]" />
                                 <div>
-                                  <p className="font-medium text-[#4e342e]">
+                                  <p className="font-medium text-[#4e342e] text-xs sm:text-sm">
                                     {booking.beautician.firstName} {booking.beautician.lastName}
                                   </p>
-                                  <p className="text-sm text-[#6d4c41]">
+                                  <p className="text-xs text-[#6d4c41] hidden sm:block">
                                     {booking.beautician.skills.slice(0, 2).join(', ')}
                                   </p>
                                 </div>
                               </div>
                             ) : (
-                              <span className="text-[#6d4c41]">Not assigned</span>
+                              <span className="text-[#6d4c41] text-xs sm:text-sm">Not assigned</span>
                             )}
                           </TableCell>
                           <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <Calendar className="w-4 h-4 text-[#6d4c41]" />
+                            <div className="flex items-center space-x-1 sm:space-x-2">
+                              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-[#6d4c41]" />
                               <div>
-                                <p className="font-medium text-[#4e342e]">
+                                <p className="font-medium text-[#4e342e] text-xs sm:text-sm">
                                   {formatDate(booking.scheduledDate)}
                                 </p>
-                                <p className="text-sm text-[#6d4c41] flex items-center">
+                                <p className="text-xs text-[#6d4c41] flex items-center">
                                   <Clock className="w-3 h-3 mr-1" />
                                   {booking.scheduledTime}
                                 </p>
@@ -434,22 +435,26 @@ const CustomerBookingsPage = () => {
                             </div>
                           </TableCell>
                           <TableCell>
-                            {getStatusBadge(booking.status)}
+                            <div className="scale-75 sm:scale-100">
+                              {getStatusBadge(booking.status)}
+                            </div>
                           </TableCell>
                           <TableCell>
-                            {getPaymentStatusBadge(booking.paymentStatus)}
+                            <div className="scale-75 sm:scale-100">
+                              {getPaymentStatusBadge(booking.paymentStatus)}
+                            </div>
                           </TableCell>
-                          <TableCell className="font-medium text-[#4e342e]">
+                          <TableCell className="font-medium text-[#4e342e] text-xs sm:text-sm">
                             {formatCurrency(booking.total)}
                           </TableCell>
                           <TableCell>
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white"
+                              className="border-[#4e342e] text-[#4e342e] hover:bg-[#4e342e] hover:text-white text-xs sm:text-sm px-2 sm:px-3"
                             >
-                              <Eye className="w-4 h-4 mr-1" />
-                              View
+                              <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                              <span className="hidden sm:inline">View</span>
                             </Button>
                           </TableCell>
                         </TableRow>

@@ -14,7 +14,6 @@ import hair4 from '@/assets/hair4.jpg';
 import makeup5 from '@/assets/makeup5.jpg';
 import spa1 from '@/assets/spa1.jpg';
 import nail from '@/assets/nail.jpg';
-import logo from '@/assets/logo.jpg';
 
 // Icons
 import { 

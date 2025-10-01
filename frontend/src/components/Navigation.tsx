@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import LanguageToggle from "./LanguageToggle";
 import RoleNavigation from "./RoleNavigation";
+import UserDropdown from "./UserDropdown";
+import VendorDropdown from "./VendorDropdown";
 import logo from "../assets/logo.jpg";
 
 const Navigation = () => {
@@ -29,10 +31,10 @@ const Navigation = () => {
   const getSearchBoxWidth = () => {
     if (user) {
       // When user is logged in, more items in navbar, so smaller search box
-      return 'w-28 sm:w-32 xl:w-36';
+      return 'w-48 sm:w-56 xl:w-60';
     } else {
       // When no user, fewer items, so larger search box
-      return 'w-40 sm:w-48 xl:w-56';
+      return 'w-64 sm:w-72 xl:w-80';
     }
   };
 
@@ -175,9 +177,11 @@ const Navigation = () => {
           
           {user ? (
             <div className="flex items-center space-x-2 pl-3 border-l border-[#f8d7da]/50">
-              <span className="text-sm text-[#6d4c41] font-medium font-sans">
-                {user.firstName}
-              </span>
+              {user.role === 'VENDOR' ? (
+                <VendorDropdown vendorName={user.firstName} />
+              ) : (
+                <UserDropdown userName={user.firstName} />
+              )}
             </div>
           ) : (
             <div className="flex items-center space-x-3">
@@ -187,7 +191,7 @@ const Navigation = () => {
                   size="sm" 
                   className="text-[#4e342e] hover:text-[#6d4c41] hover:bg-[#f8d7da]/20 font-medium font-sans"
                 >
-                  {t('nav.login')}
+                  {t('navigation.login')}
                 </Button>
               </Link>
               <Link to="/register">
@@ -215,7 +219,7 @@ const Navigation = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={`pl-8 pr-3 h-8 text-xs border-[#f8d7da]/50 focus:border-[#4e342e] rounded-lg font-sans bg-white shadow-sm ${
-                  user ? 'w-20' : 'w-28'
+                  user ? 'w-40' : 'w-48'
                 }`}
               />
             </div>
@@ -290,17 +294,13 @@ const Navigation = () => {
                 <RoleNavigation isMobile={true} />
                 
                 <div className="pt-3 border-t border-[#f8d7da]/30">
-                  <span className="block text-sm text-[#6d4c41] mb-3 px-2 font-medium font-sans">
-                    Welcome, {user.firstName}!
-                  </span>
-                  <Button
-                    variant="outline"
-                    onClick={handleLogout}
-                    className="w-full py-3 border-[#f8d7da]/50 text-[#4e342e] hover:bg-[#f8d7da]/20 font-sans"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    {t('nav.logout')}
-                  </Button>
+                  <div className="px-2 mb-3">
+                    {user.role === 'VENDOR' ? (
+                      <VendorDropdown vendorName={user.firstName} />
+                    ) : (
+                      <UserDropdown userName={user.firstName} />
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -310,7 +310,7 @@ const Navigation = () => {
                     variant="outline" 
                     className="w-full py-3 border-[#f8d7da]/50 text-[#4e342e] hover:bg-[#f8d7da]/20 font-sans"
                   >
-                    {t('nav.login')}
+                    {t('navigation.login')}
                   </Button>
                 </Link>
                 <Link to="/register" className="w-full">

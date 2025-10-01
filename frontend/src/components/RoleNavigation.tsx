@@ -36,20 +36,16 @@ const RoleNavigation: React.FC<RoleNavigationProps> = ({ isMobile = false }) => 
       { path: '/at-home-services', label: t('nav.atHomeServices'), icon: Home },
       { path: '/salon-visit', label: t('nav.salonVisit'), icon: Building },
       { path: '/customer', label: t('nav.dashboard'), icon: UserIcon },
-      { path: '/customer/profile', label: t('nav.profile'), icon: Settings },
-      { path: '/customer/bookings', label: t('nav.appointments'), icon: Calendar },
     ],
     VENDOR: [
+      { path: '/', label: t('nav.home'), icon: Home },
       { path: '/vendor', label: t('nav.dashboard'), icon: Building },
       { path: '/vendor/appointments', label: t('nav.appointments'), icon: Calendar },
       { path: '/vendor/services', label: t('nav.services'), icon: Scissors },
-      { path: '/vendor/revenue', label: t('nav.revenue'), icon: DollarSign },
-      { path: '/vendor/profile', label: t('nav.profile'), icon: Settings },
     ],
     BEAUTICIAN: [
       { path: '/beautician', label: t('nav.dashboard'), icon: Scissors },
       { path: '/beautician/appointments', label: t('nav.assignedAppointments'), icon: Calendar },
-      { path: '/beautician/earnings', label: t('nav.earnings'), icon: DollarSign },
       { path: '/beautician/profile', label: t('nav.profile'), icon: Settings },
     ],
     MANAGER: [
@@ -66,7 +62,6 @@ const RoleNavigation: React.FC<RoleNavigationProps> = ({ isMobile = false }) => 
       { path: '/admin/managers', label: t('nav.managers'), icon: UserCheck },
       { path: '/admin/financials', label: t('nav.financials'), icon: DollarSign },
       { path: '/admin/reports', label: t('nav.reports'), icon: BarChart3 },
-      { path: '/admin/settings', label: t('nav.settings'), icon: Settings },
     ],
   };
 
@@ -86,15 +81,6 @@ const RoleNavigation: React.FC<RoleNavigationProps> = ({ isMobile = false }) => 
             {link.label}
           </Link>
         ))}
-        
-        {/* Logout button */}
-        <button
-          onClick={logout}
-          className="flex items-center w-full py-3 px-4 text-[#4e342e] hover:bg-[#f8d7da]/20 rounded-lg transition-colors font-medium font-sans"
-        >
-          <LogOut className="w-4 h-4 mr-2" />
-          {t('nav.logout')}
-        </button>
       </div>
     );
   }
@@ -112,15 +98,6 @@ const RoleNavigation: React.FC<RoleNavigationProps> = ({ isMobile = false }) => 
           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f8d7da] transition-all duration-300 group-hover:w-full"></span>
         </Link>
       ))}
-      
-      {/* Logout button */}
-      <button
-        onClick={logout}
-        className="text-[#4e342e] hover:text-[#6d4c41] transition-colors font-medium text-sm relative group font-sans"
-      >
-        {t('nav.logout')}
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f8d7da] transition-all duration-300 group-hover:w-full"></span>
-      </button>
     </nav>
   );
 };
